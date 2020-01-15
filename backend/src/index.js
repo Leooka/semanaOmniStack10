@@ -1,7 +1,19 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const routes = require('./routes');
 
 const app = express();
 
+mongoose.connect('mongodb+srv://omnistack:toor@cluster0-uimat.mongodb.net/week10?retryWrites=true&w=majority ',{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+app.use(express.json());
+app.use(routes);
+
+app.listen(3333);    
+ 
 //Métodos HTTP: get, post, put, delete
 
 // Tipos de parâmetros:
@@ -11,8 +23,3 @@ const app = express();
 
 // MongoDB (Não-relacional)
 
-app.get('/', (request, response) => { 
-    return response.json( { message: 'Hello World' } );
- });
-
-app.listen(3333);    
